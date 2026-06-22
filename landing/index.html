@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dealt. — play the hand you're dealt</title>
+  <meta name="description" content="four cards. four dimensions of life. level up by showing up every day." />
+  <meta property="og:title" content="dealt." />
+  <meta property="og:description" content="you didn't choose your hand. but you choose what you do with it." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0D0D12" />
+
+  <style>
+    /* ── Reset ──────────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Tokens ─────────────────────────────────────────────────────────────── */
+    :root {
+      --bg:             #0D0D12;
+      --surface:        #16161E;
+      --card:           #1E1E28;
+      --accent:         #C9A84C;
+      --accent-glow:    rgba(201, 168, 76, 0.12);
+      --accent-border:  rgba(201, 168, 76, 0.25);
+      --text:           #F0EEE9;
+      --text-2:         #8A8A99;
+      --text-3:         #52525F;
+      --border:         rgba(255, 255, 255, 0.06);
+      --border-strong:  rgba(255, 255, 255, 0.10);
+      --spades:         #C9A84C;
+      --hearts:         #E05555;
+      --diamonds:       #7B8CDE;
+      --clubs:          #4CAF7D;
+      --r:              16px;
+    }
+
+    /* ── Base ───────────────────────────────────────────────────────────────── */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+                   'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 45% at 50% -5%, rgba(201, 168, 76, 0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(123, 140, 222, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── Animations ─────────────────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fillBar {
+      from { width: 0; }
+      to   { width: var(--fill-w, 0%); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.6; }
+    }
+
+    .fu  { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .d1  { animation-delay: 0.05s; }
+    .d2  { animation-delay: 0.15s; }
+    .d3  { animation-delay: 0.28s; }
+    .d4  { animation-delay: 0.44s; }
+    .d5  { animation-delay: 0.62s; }
+    .d6  { animation-delay: 0.80s; }
+
+    /* ── Header ─────────────────────────────────────────────────────────────── */
+    header {
+      padding: 52px 0 0;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: -0.3px;
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .logo-dot { opacity: 0.7; }
+
+    /* ── Hero ───────────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 0 52px;
+      text-align: center;
+    }
+
+    .tagline {
+      font-size: clamp(30px, 7vw, 50px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .tagline em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .description {
+      font-size: clamp(15px, 2.5vw, 17px);
+      line-height: 1.75;
+      color: var(--text-2);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── Divider ────────────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ── Phone mockup ───────────────────────────────────────────────────────── */
+    .mockup-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 52px 0;
+    }
+
+    .phone {
+      width: clamp(260px, 70vw, 310px);
+      background: var(--bg);
+      border-radius: 44px;
+      border: 1.5px solid var(--border-strong);
+      padding: 0 0 28px;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.03),
+        0 32px 64px rgba(0, 0, 0, 0.55),
+        0 8px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+
+    /* Status bar area */
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px 4px;
+    }
+
+    .status-time {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .status-dot {
+      width: 14px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--text);
+      opacity: 0.7;
+    }
+
+    .status-dot.signal {
+      width: 3px; height: 3px; border-radius: 50%;
+    }
+
+    /* Dynamic island */
+    .island {
+      width: 90px;
+      height: 30px;
+      background: #000;
+      border-radius: 20px;
+      margin: 0 auto 16px;
+    }
+
+    /* App content inside phone */
+    .phone-content {
+      padding: 0 14px;
+    }
+
+    .phone-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .phone-app-name {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--accent);
+      letter-spacing: -0.3px;
+    }
+
+    .phone-badge {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-2);
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 3px 8px;
+    }
+
+    /* Streak bar inside phone */
+    .phone-streak {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .streak-flame {
+      font-size: 14px;
+    }
+
+    .streak-label {
+      font-size: 11px;
+      color: var(--text-2);
+      flex: 1;
+    }
+
+    .streak-days {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Card grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .suit-card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 0.7;
+      transition: transform 0.2s ease;
+    }
+
+    /* Top glow per suit */
+    .suit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to bottom, var(--suit-c), transparent);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    /* Subtle left border accent */
+    .suit-card::after {
+      content: '';
+      position: absolute;
+      top: 8px; bottom: 8px; left: 0;
+      width: 2px;
+      border-radius: 0 2px 2px 0;
+      background: var(--suit-c);
+      opacity: 0.4;
+    }
+
+    .sc-spades   { --suit-c: var(--spades);   border-color: rgba(201,168,76,0.14); }
+    .sc-hearts   { --suit-c: var(--hearts);   border-color: rgba(224,85,85,0.14);  }
+    .sc-diamonds { --suit-c: var(--diamonds); border-color: rgba(123,140,222,0.14); }
+    .sc-clubs    { --suit-c: var(--clubs);    border-color: rgba(76,175,125,0.14); }
+
+    .pip-top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.1;
+    }
+
+    .pip-rank {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--suit-c);
+      line-height: 1;
+    }
+
+    .pip-sym {
+      font-size: 11px;
+      color: var(--suit-c);
+    }
+
+    .card-body {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .sym-lg {
+      font-size: 36px;
+      color: var(--suit-c);
+      display: block;
+      line-height: 1;
+    }
+
+    .suit-name {
+      font-size: 8px;
+      font-weight: 500;
+      color: var(--text-3);
+      text-transform: lowercase;
+      letter-spacing: 0.4px;
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .card-foot {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      right: 10px;
+    }
+
+    .prog-track {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 3px;
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--suit-c);
+      border-radius: 2px;
+      width: var(--fill-w, 0%);
+      animation: fillBar 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;
+    }
+
+    .prog-label {
+      font-size: 8px;
+      color: var(--text-3);
+    }
+
+    /* ── CTA Section ────────────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 12px 0 56px;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-3);
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      margin-bottom: 18px;
+    }
+
+    .cta-card {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: 20px;
+      padding: 28px 24px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      color: var(--text-2);
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .form-row-top {
+      margin-bottom: 8px;
+    }
+
+    .submit-btn-full {
+      width: 100%;
+    }
+
+    .email-input {
+      flex: 1;
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .email-input::placeholder { color: var(--text-3); }
+
+    .email-input:focus {
+      border-color: var(--accent-border);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .submit-btn {
+      background: var(--accent);
+      color: #111;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+      transition: opacity 0.15s, transform 0.1s;
+      -webkit-appearance: none;
+    }
+
+    .submit-btn:hover  { opacity: 0.88; }
+    .submit-btn:active { transform: scale(0.97); }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .success-state {
+      display: none;
+      padding: 8px 0;
+    }
+
+    .success-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .success-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .success-sub {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .form-error {
+      font-size: 12px;
+      color: var(--hearts);
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────────────── */
+    footer {
+      padding: 0 0 52px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .footer-line {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .footer-line span {
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    /* ── Responsive ─────────────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .page         { padding: 0 20px; }
+      header        { padding-top: 40px; }
+      .hero         { padding: 56px 0 44px; }
+      .form-row-top { flex-direction: column; }
+      .submit-btn   { width: 100%; padding: 14px; font-size: 14px; }
+      .mockup-wrap  { padding: 44px 0; }
+      .cta-card     { padding: 22px 18px; }
+    }
+
+    @media (min-width: 768px) {
+      header       { padding-top: 72px; }
+      .hero        { padding: 88px 0 64px; }
+      .mockup-wrap { padding: 64px 0; }
+      .phone       { width: 310px; }
+    }
+
+    /* High-DPI phones get crisper text */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .suit-card::after { width: 1.5px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ── Header ── -->
+    <header>
+      <div class="logo fu d1">dealt<span class="logo-dot">.</span></div>
+    </header>
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <h1 class="tagline fu d2">
+        you didn't choose<br>
+        your <em>hand.</em><br>
+        but you choose what<br>
+        you do with it.
+      </h1>
+      <p class="description fu d3">
+        dealt. gives you four cards — discipline, relationships, wealth, and health.
+        complete daily commitments to earn points and rank up each suit, from a 2 all the way to an ace.
+        show up every day, and watch your hand transform.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Phone mockup ── -->
+    <div class="mockup-wrap fu d4">
+      <div class="phone">
+
+        <!-- Dynamic island -->
+        <div style="padding: 12px 0 4px; display:flex; justify-content:center;">
+          <div class="island"></div>
+        </div>
+
+        <div class="phone-content">
+
+          <!-- App header row -->
+          <div class="phone-header-row">
+            <span class="phone-app-name">dealt.</span>
+            <span class="phone-badge">week 3</span>
+          </div>
+
+          <!-- Streak row -->
+          <div class="phone-streak">
+            <span class="streak-flame">🔥</span>
+            <span class="streak-label">current streak</span>
+            <span class="streak-days">12 days</span>
+          </div>
+
+          <!-- 2×2 card grid -->
+          <div class="card-grid">
+
+            <!-- Spades ♠ -->
+            <div class="suit-card sc-spades">
+              <div class="pip-top">
+                <div class="pip-rank">6</div>
+                <div class="pip-sym">♠</div>
+              </div>
+              <div class="card-body">
+                <span class="sym-lg">♠</span>
+                <div class="suit-name">discipline</div>
+              </div>
+              <div class="card-foot">
+                <div class="prog-track">
+                  <div class="prog-fill" style="--fill-w: 60%"></div>
+                </div>
+                <span class="prog-label">18 / 30 pts</span>
+              </div>
+            </div>
+
+            <!-- Hearts ♥ -->
+            <div class="suit-card sc-hearts">
+              <div class="pip-top">
+                <div class="pip-rank">4</div>
+                <div class="pip-sym">♥</div>
+              </div>
+              <div class="card-body">
+                <span class="sym-lg">♥</span>
+                <div class="suit-name">relationships</div>
+              </div>
+              <div class="card-foot">
+                <div class="prog-track">
+                  <div class="prog-fill" style="--fill-w: 23%"></div>
+                </div>
+                <span class="prog-label">7 / 30 pts</span>
+              </div>
+            </div>
+
+            <!-- Diamonds ♦ -->
+            <div class="suit-card sc-diamonds">
+              <div class="pip-top">
+                <div class="pip-rank">8</div>
+                <div class="pip-sym">♦</div>
+              </div>
+              <div class="card-body">
+                <span class="sym-lg">♦</span>
+                <div class="suit-name">wealth</div>
+              </div>
+              <div class="card-foot">
+                <div class="prog-track">
+                  <div class="prog-fill" style="--fill-w: 80%"></div>
+                </div>
+                <span class="prog-label">24 / 30 pts</span>
+              </div>
+            </div>
+
+            <!-- Clubs ♣ -->
+            <div class="suit-card sc-clubs">
+              <div class="pip-top">
+                <div class="pip-rank">5</div>
+                <div class="pip-sym">♣</div>
+              </div>
+              <div class="card-body">
+                <span class="sym-lg">♣</span>
+                <div class="suit-name">health</div>
+              </div>
+              <div class="card-foot">
+                <div class="prog-track">
+                  <div class="prog-fill" style="--fill-w: 40%"></div>
+                </div>
+                <span class="prog-label">12 / 30 pts</span>
+              </div>
+            </div>
+
+          </div><!-- /card-grid -->
+        </div><!-- /phone-content -->
+      </div><!-- /phone -->
+    </div><!-- /mockup-wrap -->
+
+    <div class="divider"></div>
+
+    <!-- ── CTA ── -->
+    <section class="cta-section">
+      <div class="fu d5">
+        <p class="cta-eyebrow">early access</p>
+        <div class="cta-card">
+          <div class="cta-title">join the waitlist</div>
+          <div class="cta-sub">be the first to know when dealt. is ready.</div>
+
+          <div id="formState">
+            <div class="form-row form-row-top">
+              <input
+                type="text"
+                id="nameInput"
+                class="email-input"
+                placeholder="your first name"
+                autocomplete="given-name"
+              />
+              <input
+                type="email"
+                id="emailInput"
+                class="email-input"
+                placeholder="your@email.com"
+                autocomplete="email"
+                inputmode="email"
+              />
+            </div>
+            <button type="button" id="submitBtn" class="submit-btn submit-btn-full" onclick="handleSubmit()">
+              join the waitlist
+            </button>
+            <div class="form-error" id="formError">please enter a valid email address.</div>
+          </div>
+
+          <div class="success-state" id="successState">
+            <div class="success-icon">♠</div>
+            <div class="success-title" id="successTitle">you're in the deck.</div>
+            <div class="success-sub">we'll deal you in when it's time.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer class="fu d6">
+      <p class="footer-line">
+        no spam<span>.</span> just your deal when it's ready<span>.</span>
+      </p>
+    </footer>
+
+  </div><!-- /page -->
+
+  <script>
+    function isValidEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    }
+
+    function handleSubmit() {
+      var nameInput  = document.getElementById('nameInput');
+      var emailInput = document.getElementById('emailInput');
+      var error      = document.getElementById('formError');
+      var btn        = document.getElementById('submitBtn');
+      var name       = nameInput.value.trim();
+      var email      = emailInput.value.trim();
+
+      error.style.display = 'none';
+
+      if (!name) {
+        error.textContent = 'please enter your first name.';
+        error.style.display = 'block';
+        nameInput.focus();
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        error.textContent = 'please enter a valid email address.';
+        error.style.display = 'block';
+        emailInput.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'joining...';
+
+      fetch('https://formspree.io/f/xaqzvgjw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email }),
+      })
+      .then(function(res) {
+        if (res.ok) {
+          document.getElementById('successTitle').textContent = "you're in the deck, " + name + ".";
+          document.getElementById('formState').style.display = 'none';
+          document.getElementById('successState').style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'join the waitlist';
+          error.textContent = 'something went wrong. please try again.';
+          error.style.display = 'block';
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'join the waitlist';
+        error.textContent = 'something went wrong. please try again.';
+        error.style.display = 'block';
+      });
+    }
+
+    // Allow Enter key in either field to submit
+    ['nameInput', 'emailInput'].forEach(function(id) {
+      document.getElementById(id).addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') handleSubmit();
+      });
+    });
+  </script>
+</body>
+</html>

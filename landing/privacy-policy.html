@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy policy — dealt.</title>
+  <meta name="description" content="Privacy policy for dealt. by Virelo Labs." />
+  <meta name="theme-color" content="#0D0D12" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #0D0D12;
+      --surface:       #16161E;
+      --card:          #1E1E28;
+      --accent:        #C9A84C;
+      --accent-border: rgba(201, 168, 76, 0.25);
+      --text:          #F0EEE9;
+      --text-2:        #8A8A99;
+      --text-3:        #52525F;
+      --border:        rgba(255, 255, 255, 0.07);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter',
+                   'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% -10%,
+        rgba(201, 168, 76, 0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 40px 0 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .logo:hover { opacity: 0.8; }
+
+    header h1 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    /* ── Body content ── */
+    section {
+      margin-bottom: 44px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text-2);
+      margin-bottom: 14px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: var(--text-2);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-3);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { opacity: 0.8; }
+
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    footer a {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 0 20px 60px; }
+      header { padding: 28px 0 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a href="/" class="logo">dealt.</a>
+      <h1>privacy policy</h1>
+      <p class="updated">last updated: june 21, 2026</p>
+    </header>
+    <hr />
+
+    <section>
+      <h2>overview</h2>
+      <p>dealt. is built by <strong>Virelo Labs</strong>. Your privacy matters to us. This policy explains what data we collect, how we use it, and the choices you have. If you have any questions, contact us at <a href="mailto:playdealt@gmail.com">playdealt@gmail.com</a>.</p>
+    </section>
+
+    <section>
+      <h2>what we collect</h2>
+      <p>We collect only what's needed to provide and improve the dealt. experience:</p>
+      <ul>
+        <li><strong>Account information</strong> — your name and email address or phone number used to create your account</li>
+        <li><strong>Onboarding responses</strong> — your goals, age range, and ideal day preferences you provide during setup</li>
+        <li><strong>Daily pulse data</strong> — mood, energy, sleep, stress, and focus check-in scores</li>
+        <li><strong>Commitment data</strong> — the commitments you create and your daily completion logs</li>
+        <li><strong>Journal entries</strong> — text entries you write within the app</li>
+        <li><strong>Card progression data</strong> — your rank and point progress across all four suits</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>how we use your data</h2>
+      <p>Your data is used to provide and personalize the app experience — including generating AI-powered commitment suggestions, growth insights, and journal prompts that are relevant to your goals and progress.</p>
+      <p>We do not use your data for advertising, sell it to third parties, or share it with anyone outside of what's required to operate the service.</p>
+    </section>
+
+    <section>
+      <h2>AI processing</h2>
+      <p>dealt. uses <strong>Anthropic's Claude API</strong> to generate personalized content such as commitment suggestions, journal prompts, and growth insights. To do this, relevant portions of your onboarding responses, journal entries, and activity data may be sent to Anthropic's API.</p>
+      <p>This data is used solely to generate your personalized content and is <strong>not used to train AI models</strong>. Anthropic's data handling is governed by their <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">privacy policy</a>.</p>
+    </section>
+
+    <section>
+      <h2>data storage & security</h2>
+      <p>Your data is stored securely via <strong>Supabase</strong>, with industry-standard encryption in transit and at rest. We apply row-level security policies so your data is only accessible to you.</p>
+    </section>
+
+    <section>
+      <h2>subscriptions & payments</h2>
+      <p>Subscription and payment processing is handled entirely by <strong>Apple / the App Store</strong>. dealt. does not receive, store, or process your payment card information. Please refer to Apple's privacy policy for details on how payment data is handled.</p>
+    </section>
+
+    <section>
+      <h2>no ads, no data selling</h2>
+      <p>dealt. contains no advertising and uses no ad tracking technologies. We do not sell, rent, or trade your personal data to any third parties. Your data exists solely to power your experience in the app.</p>
+    </section>
+
+    <section>
+      <h2>account deletion</h2>
+      <p>You can request deletion of your account and all associated data at any time through the app settings. Deletion is permanent and cannot be undone. Your data will be removed from our systems within 30 days of the request.</p>
+    </section>
+
+    <section>
+      <h2>your rights</h2>
+      <p>You may request access to, correction of, or deletion of your personal data at any time. To submit a data request, email us at <a href="mailto:playdealt@gmail.com">playdealt@gmail.com</a> and we will respond within 30 days.</p>
+    </section>
+
+    <section>
+      <h2>children's privacy</h2>
+      <p>dealt. is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
+    </section>
+
+    <section>
+      <h2>changes to this policy</h2>
+      <p>We may update this privacy policy from time to time. When we do, we will update the "last updated" date at the top of this page. Continued use of dealt. after any changes constitutes your acceptance of the updated policy.</p>
+    </section>
+
+    <section>
+      <h2>contact</h2>
+      <p>Questions, concerns, or data requests? Reach us at <a href="mailto:playdealt@gmail.com">playdealt@gmail.com</a>.</p>
+    </section>
+
+    <footer>
+      <span>© 2026 Virelo Labs. all rights reserved.</span>
+      <a href="/terms-of-service">terms of service</a>
+    </footer>
+  </div>
+</body>
+</html>
