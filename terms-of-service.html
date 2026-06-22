@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>terms of service — dealt.</title>
+  <meta name="description" content="Terms of service for dealt. by Virelo Labs." />
+  <meta name="theme-color" content="#0D0D12" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #0D0D12;
+      --surface:       #16161E;
+      --card:          #1E1E28;
+      --accent:        #C9A84C;
+      --accent-border: rgba(201, 168, 76, 0.25);
+      --text:          #F0EEE9;
+      --text-2:        #8A8A99;
+      --text-3:        #52525F;
+      --border:        rgba(255, 255, 255, 0.07);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter',
+                   'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% -10%,
+        rgba(201, 168, 76, 0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 40px 0 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .logo:hover { opacity: 0.8; }
+
+    header h1 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .updated {
+      font-size: 13px;
+      color: var(--text-3);
+      margin-top: 2px;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    /* ── Body content ── */
+    section {
+      margin-bottom: 44px;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text-2);
+      margin-bottom: 14px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: var(--text-2);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-3);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { opacity: 0.8; }
+
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    footer a {
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 0 20px 60px; }
+      header { padding: 28px 0 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a href="/" class="logo">dealt.</a>
+      <h1>terms of service</h1>
+      <p class="updated">last updated: june 21, 2026</p>
+    </header>
+    <hr />
+
+    <section>
+      <h2>acceptance of terms</h2>
+      <p>By downloading, installing, or using dealt. ("the app"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the app. These terms constitute a legally binding agreement between you and <strong>Virelo Labs</strong>, the company behind dealt.</p>
+    </section>
+
+    <section>
+      <h2>description of service</h2>
+      <p>dealt. is a self-improvement and habit tracking app built around a card-based progression system. The app allows users to set and track personal commitments, log daily check-ins, write journal entries, and receive AI-generated personalized suggestions and insights across four life dimensions: discipline, relationships, wealth, and health.</p>
+    </section>
+
+    <section>
+      <h2>account responsibilities</h2>
+      <p>To use dealt., you must create an account. You agree to:</p>
+      <ul>
+        <li>Provide accurate and complete information when creating your account</li>
+        <li>Keep your account credentials secure and confidential</li>
+        <li>Notify us immediately at <a href="mailto:playdealt@gmail.com">playdealt@gmail.com</a> if you suspect unauthorized access to your account</li>
+        <li>Be responsible for all activity that occurs under your account</li>
+      </ul>
+      <p>You must be at least 13 years old to use dealt. By using the app, you represent that you meet this requirement.</p>
+    </section>
+
+    <section>
+      <h2>subscriptions & billing</h2>
+      <p>dealt. offers a free tier and a premium subscription tier. Premium provides access to additional features including unlimited commitments, a full journal, growth map analytics, complete history, and personalized AI suggestions.</p>
+      <p><strong>Pricing:</strong> Premium is available at <strong>$4.99/month</strong> or <strong>$39.99/year</strong>. Prices are set in USD and may vary by region based on Apple's pricing tiers.</p>
+      <p><strong>Billing:</strong> All payments are processed by <strong>Apple / the App Store</strong>. Your subscription is billed through your Apple ID at confirmation of purchase.</p>
+      <p><strong>Auto-renewal:</strong> Subscriptions automatically renew at the end of each billing period unless cancelled at least 24 hours before the renewal date.</p>
+      <p><strong>Managing your subscription:</strong> You can cancel or manage your subscription at any time through your Apple ID Settings → Subscriptions. Cancellation takes effect at the end of the current billing period — you retain premium access until then.</p>
+      <p>Virelo Labs does not issue refunds for partial subscription periods. Refund requests must be directed to Apple.</p>
+    </section>
+
+    <section>
+      <h2>user content</h2>
+      <p>You own the content you create in dealt., including your journal entries and personal data. By using the app, you grant Virelo Labs a limited, non-exclusive license to store, process, and use your content solely to provide the service to you — including generating personalized AI content on your behalf.</p>
+      <p>We do not claim ownership of your content and do not use it for any purpose beyond operating and improving dealt. for you.</p>
+    </section>
+
+    <section>
+      <h2>prohibited conduct</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the app for any unlawful purpose or in violation of any applicable law or regulation</li>
+        <li>Attempt to reverse engineer, decompile, or disassemble any part of the app</li>
+        <li>Attempt to exploit, hack, or compromise the security of the service or its infrastructure</li>
+        <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity</li>
+        <li>Interfere with or disrupt the integrity or performance of the service</li>
+        <li>Use any automated means to access or scrape the service without our express written permission</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>disclaimer</h2>
+      <p>dealt. is a self-improvement and habit tracking tool provided for general wellness and personal development purposes only. <strong>It is not a substitute for professional medical, psychological, psychiatric, financial, or legal advice.</strong></p>
+      <p>If you are experiencing a mental health crisis or medical emergency, please contact a qualified professional or emergency services. The app's content, AI-generated suggestions, and insights are for informational and motivational purposes only and should not be relied upon as professional guidance.</p>
+      <p>The app is provided "as is" without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+    </section>
+
+    <section>
+      <h2>limitation of liability</h2>
+      <p>To the fullest extent permitted by applicable law, Virelo Labs shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of dealt., even if we have been advised of the possibility of such damages.</p>
+      <p>Our total liability to you for any claims arising from your use of the app shall not exceed the amount you paid to us in the 12 months preceding the claim, or $10 USD if you have not made any payments.</p>
+    </section>
+
+    <section>
+      <h2>termination</h2>
+      <p>You may stop using dealt. at any time. We reserve the right to suspend or terminate your access to the service, with or without notice, if you violate these terms or engage in conduct that we reasonably determine to be harmful to other users, the service, or Virelo Labs.</p>
+      <p>Upon termination, your right to use the app ceases immediately. You may request deletion of your data as described in our <a href="/privacy-policy">privacy policy</a>.</p>
+    </section>
+
+    <section>
+      <h2>changes to these terms</h2>
+      <p>Virelo Labs may update these Terms of Service from time to time. When we do, we will update the "last updated" date at the top of this page. We will make reasonable efforts to notify users of material changes through the app or by email.</p>
+      <p>Your continued use of dealt. after any changes to these terms constitutes your acceptance of the updated terms.</p>
+    </section>
+
+    <section>
+      <h2>governing law</h2>
+      <p>These terms are governed by the laws of the United States. Any disputes arising from these terms or your use of dealt. shall be resolved through binding arbitration in accordance with applicable law, except where prohibited.</p>
+    </section>
+
+    <section>
+      <h2>contact</h2>
+      <p>Questions about these terms? Reach us at <a href="mailto:playdealt@gmail.com">playdealt@gmail.com</a>.</p>
+    </section>
+
+    <footer>
+      <span>© 2026 Virelo Labs. all rights reserved.</span>
+      <a href="/privacy-policy">privacy policy</a>
+    </footer>
+  </div>
+</body>
+</html>
