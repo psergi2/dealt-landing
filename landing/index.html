@@ -382,130 +382,6 @@
       color: var(--text-3);
     }
 
-    /* ── CTA Section ────────────────────────────────────────────────────────── */
-    .cta-section {
-      padding: 12px 0 56px;
-      text-align: center;
-    }
-
-    .cta-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-3);
-      letter-spacing: 2px;
-      text-transform: lowercase;
-      margin-bottom: 18px;
-    }
-
-    .cta-card {
-      background: var(--card);
-      border: 1px solid var(--border-strong);
-      border-radius: 20px;
-      padding: 28px 24px;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .cta-sub {
-      font-size: 14px;
-      color: var(--text-2);
-      margin-bottom: 20px;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .form-row-top {
-      margin-bottom: 8px;
-    }
-
-    .submit-btn-full {
-      width: 100%;
-    }
-
-    .email-input {
-      flex: 1;
-      min-width: 0;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 13px 16px;
-      color: var(--text);
-      font-size: 14px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      -webkit-appearance: none;
-    }
-
-    .email-input::placeholder { color: var(--text-3); }
-
-    .email-input:focus {
-      border-color: var(--accent-border);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-
-    .submit-btn {
-      background: var(--accent);
-      color: #111;
-      border: none;
-      border-radius: 12px;
-      padding: 13px 20px;
-      font-size: 13px;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      white-space: nowrap;
-      letter-spacing: 0.2px;
-      transition: opacity 0.15s, transform 0.1s;
-      -webkit-appearance: none;
-    }
-
-    .submit-btn:hover  { opacity: 0.88; }
-    .submit-btn:active { transform: scale(0.97); }
-
-    .submit-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .success-state {
-      display: none;
-      padding: 8px 0;
-    }
-
-    .success-icon {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .success-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .success-sub {
-      font-size: 13px;
-      color: var(--text-2);
-    }
-
-    .form-error {
-      font-size: 12px;
-      color: var(--hearts);
-      margin-top: 8px;
-      display: none;
-    }
 
     /* ── Support Section ────────────────────────────────────────────────────── */
     .support-section {
@@ -592,10 +468,7 @@
       .page         { padding: 0 20px; }
       header        { padding-top: 40px; }
       .hero         { padding: 56px 0 44px; }
-      .form-row-top { flex-direction: column; }
-      .submit-btn   { width: 100%; padding: 14px; font-size: 14px; }
       .mockup-wrap  { padding: 44px 0; }
-      .cta-card     { padding: 22px 18px; }
     }
 
     @media (min-width: 768px) {
@@ -742,50 +615,6 @@
 
     <div class="divider"></div>
 
-    <!-- ── CTA ── -->
-    <section class="cta-section">
-      <div class="fu d5">
-        <p class="cta-eyebrow">early access</p>
-        <div class="cta-card">
-          <div class="cta-title">join the waitlist</div>
-          <div class="cta-sub">be the first to know when dealt. is ready.</div>
-
-          <div id="formState">
-            <div class="form-row form-row-top">
-              <input
-                type="text"
-                id="nameInput"
-                class="email-input"
-                placeholder="your first name"
-                autocomplete="given-name"
-              />
-              <input
-                type="email"
-                id="emailInput"
-                class="email-input"
-                placeholder="your@email.com"
-                autocomplete="email"
-                inputmode="email"
-              />
-            </div>
-            <button type="button" id="submitBtn" class="submit-btn submit-btn-full" onclick="handleSubmit()">
-              join the waitlist
-            </button>
-            <div class="form-error" id="formError">please enter a valid email address.</div>
-          </div>
-
-          <div class="success-state" id="successState">
-            <div class="success-icon">♠</div>
-            <div class="success-title" id="successTitle">you're in the deck.</div>
-            <div class="success-sub">we'll deal you in when it's time.</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
     <!-- ── Support ── -->
     <section class="support-section fu d6">
       <h2 class="support-heading">support.</h2>
@@ -804,77 +633,10 @@
 
     <!-- ── Footer ── -->
     <footer class="fu d6">
-      <p class="footer-line">
-        no spam<span>.</span> just your deal when it's ready<span>.</span>
-      </p>
+      <p class="footer-line">dealt<span>.</span> all rights reserved<span>.</span></p>
     </footer>
 
   </div><!-- /page -->
 
-  <script>
-    function isValidEmail(v) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-    }
-
-    function handleSubmit() {
-      var nameInput  = document.getElementById('nameInput');
-      var emailInput = document.getElementById('emailInput');
-      var error      = document.getElementById('formError');
-      var btn        = document.getElementById('submitBtn');
-      var name       = nameInput.value.trim();
-      var email      = emailInput.value.trim();
-
-      error.style.display = 'none';
-
-      if (!name) {
-        error.textContent = 'please enter your first name.';
-        error.style.display = 'block';
-        nameInput.focus();
-        return;
-      }
-
-      if (!isValidEmail(email)) {
-        error.textContent = 'please enter a valid email address.';
-        error.style.display = 'block';
-        emailInput.focus();
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = 'joining...';
-
-      fetch('https://formspree.io/f/xaqzvgjw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email }),
-      })
-      .then(function(res) {
-        if (res.ok) {
-          document.getElementById('successTitle').textContent = "you're in the deck, " + name + ".";
-          document.getElementById('formState').style.display = 'none';
-          document.getElementById('successState').style.display = 'block';
-        } else {
-          btn.disabled = false;
-          btn.textContent = 'join the waitlist';
-          error.textContent = 'something went wrong. please try again.';
-          error.style.display = 'block';
-        }
-      })
-      .catch(function() {
-        btn.disabled = false;
-        btn.textContent = 'join the waitlist';
-        error.textContent = 'something went wrong. please try again.';
-        error.style.display = 'block';
-      });
-    }
-
-    // Allow Enter key in either field to submit
-    ['nameInput', 'emailInput'].forEach(function(id) {
-      document.getElementById(id).addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') handleSubmit();
-      });
-    });
-  </script>
 </body>
 </html>
-
